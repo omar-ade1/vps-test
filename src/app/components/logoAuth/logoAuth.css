@@ -1,0 +1,31 @@
+.logo-auth:hover {
+  position: relative;
+  animation-name: animation-logo;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+}
+
+@keyframes animation-logo {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  10% {
+    transform: rotate(3deg) scale(1.1);
+  }
+  20% {
+    transform: rotate(-3deg) scale(1.1);
+  }
+  30% {
+    transform: rotate(0deg) scale(1);
+  }
+  40% {
+    transform: rotate(3deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(-3deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
