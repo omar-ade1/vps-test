@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  src: url(../../public/Mj_Yalda_0.ttf);
+  font-family: logo-font;
+}
+
+@font-face {
+  src: url(../../public/BoutrosNewsH1-Bold.ttf);
+  font-family: l;
+}
+
+.shadow-button {
+  box-shadow: 0px 0px 10px 5px rgb(132, 0, 255);
+  transition: 0.3s all;
+}
+.shadow-button:hover {
+  box-shadow: 0px 0px 10px 5px white;
+}
+
+.shadow-button-start {
+  box-shadow: 0px 0px 10px 5px rgb(0, 96, 230);
+  transition: 0.3s all;
+}
+.shadow-button-start:hover {
+  box-shadow: 0px 0px 10px 5px white;
+}
+.logo-container:hover .image-for-logo {
+  transform: scale(1.2);
+}
+.arrow-home-page {
+  animation-name: arrowHomePage;
+  animation-direction: alternate-reverse;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-delay: 1s;
+}
+@keyframes arrowHomePage {
+  0%,
+  100% {
+    transform: translate(0, -10px) rotate(-45deg);
+  }
+  50% {
+    transform: translate(0, 10px) rotate(-45deg);
+  }
+}

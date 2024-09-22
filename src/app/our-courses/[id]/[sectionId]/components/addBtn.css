@@ -1,0 +1,6 @@
+#radio-container {
+}
+input:checked + .radio-title {
+  background-color: rgb(0, 136, 255);
+  color: white;
+}
