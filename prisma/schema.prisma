@@ -1,0 +1,198 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model StudentDegree {
+  id        Int      @id @unique @default(autoincrement())
+  imgUrl    String   @unique
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model User {
+  id                Int                 @id @unique @default(autoincrement())
+  userName          String
+  email             String              @unique
+  tel               String
+  password          String
+  isConfirm         Boolean             @default(false)
+  isAdmin           Boolean             @default(false)
+  resultOfExam      ResultOfExam[]
+  enrollments       Course[]            @relation("UserEnrollments") // الدورات التي اشترك بها المستخدم
+  EnrollmentRequest EnrollmentRequest[]
+}
+
+model EnrollmentRequest {
+  id        Int      @id @unique @default(autoincrement())
+  userId    Int // معرف المستخدم الذي قام بتقديم الطلب
+  courseId  Int // معرف الدورة التي يرغب المستخدم في الاشتراك بها
+  status    String   @default("Pending") // حالة الطلب: "Pending", "Accepted", "Rejected"
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id                Int                 @id @unique @default(autoincrement())
+  courseName        String              @unique
+  courseSubName     String
+  courseImg         String              @unique
+  sections          Section[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  enrolledUsers     User[]              @relation("UserEnrollments") // المستخدمين الذين اشتركوا في الدورة
+  EnrollmentRequest EnrollmentRequest[]
+}
+
+model Section {
+  id            Int             @id @default(autoincrement())
+  title         String
+  Course        Course          @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId      Int
+  details       String?
+  partOfSection partOfSection[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model partOfSection {
+  id             Int              @id @default(autoincrement())
+  title          String
+  Section        Section          @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  sectionId      Int
+  details        String?
+  GroupOfSection GroupOfSection[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model GroupOfSection {
+  id              Int           @id @unique @default(autoincrement())
+  title           String
+  type            String
+  details         String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  partOfSection   partOfSection @relation(fields: [partOfSectionId], references: [id], onDelete: Cascade)
+  partOfSectionId Int
+
+  Test   Test? @relation(fields: [testId], references: [id], onDelete: Cascade)
+  testId Int?
+
+  // Video   Video? @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  // videoId Int?
+
+  videoId Int?   @unique // حقل الفيديو
+  Video   Video?
+
+  File   File? @relation(fields: [fileId], references: [id], onDelete: Cascade)
+  fileId Int?
+
+  Note   Note? @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  noteId Int?
+}
+
+model Test {
+  id             Int              @id @unique @default(autoincrement())
+  fullMark       Int
+  allowQuiz      Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  GroupOfSection GroupOfSection[]
+  ResultOfExam   ResultOfExam[]
+  questions      TestQuestion[]
+}
+
+model Video {
+  id                Int             @id @unique @default(autoincrement())
+  videoUrl          String?         @unique
+  videoName         String?
+  courseName        String?
+  sectionName       String?
+  partOfSectionName String?
+  mediaSectionName  String?
+  allowForStudent   Boolean         @default(true)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  groupOfSectionId  Int?            @unique
+  GroupOfSection    GroupOfSection? @relation(fields: [groupOfSectionId], references: [id], onDelete: Cascade) // العلاقة هنا مع @relation
+}
+
+model File {
+  id              Int              @id @unique @default(autoincrement())
+  allowForStudent Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  GroupOfSection  GroupOfSection[]
+}
+
+model Note {
+  id              Int              @id @unique @default(autoincrement())
+  allowForStudent Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  GroupOfSection  GroupOfSection[]
+}
+
+model QuestionBank {
+  id        Int        @id @unique @default(autoincrement())
+  questions Question[]
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Question {
+  id              Int            @id @unique @default(autoincrement())
+  questionText    String
+  questionSection String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  QuestionBank    QuestionBank   @relation(fields: [questionBankId], references: [id])
+  questionBankId  Int
+  // Test            Test?          @relation(fields: [testId], references: [id])
+  // testId          Int?
+  answer1         String?
+  answer2         String?
+  answer3         String?
+  answer4         String?
+  asnwerTrue      Int
+  Test            TestQuestion[]
+}
+
+model ResultOfExam {
+  id            Int      @id @unique @default(autoincrement())
+  allResult     Int
+  wrongAnswer   Int
+  correctAnswer Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  testId        Int
+  Test          Test     @relation(fields: [testId], references: [id], onDelete: Cascade)
+  User          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int
+}
+
+model TestQuestion {
+  testId     Int
+  questionId Int
+  Test       Test     @relation(fields: [testId], references: [id], onDelete: Cascade)
+  Question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@id([testId, questionId]) // composite key to ensure uniqueness
+}
