@@ -1,4 +1,3 @@
-import { DOMAIN_NAME } from "@/app/utils/domainName";
 import axios from "axios";
 
 interface inputsValues {
@@ -14,7 +13,7 @@ export const ADD_MEDIA_SECTION = async (
   partOfSectionId: number
 ) => {
   try {
-    const res = await axios.post(`${DOMAIN_NAME}/api/mediaSection?courseId=${idOfCourse}&sectionId=${sectionId}&partOfSectionId=${partOfSectionId}`, {
+    const res = await axios.post(`/api/mediaSection?courseId=${idOfCourse}&sectionId=${sectionId}&partOfSectionId=${partOfSectionId}`, {
       title: inputsValues.title,
       details: inputsValues.details,
       type: type,

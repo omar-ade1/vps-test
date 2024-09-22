@@ -1,10 +1,6 @@
-import { DOMAIN_NAME } from "@/app/utils/domainName";
 import axios from "axios";
 
-// interface InputsProps {
-//   questionText: string;
-//   questionsBankId: number;
-// }
+
 interface InputsValues {
   questionText: string;
   questionsBankId: number;
@@ -18,7 +14,7 @@ interface InputsValues {
 
 export const ADD_QUESTION_FOR_EXAM = async (inputsValues: InputsValues, idOfCourse: string, testId: string) => {
   try {
-    const res = await axios.post(`${DOMAIN_NAME}/api/questionForExam?courseId=${idOfCourse}&testId=${testId}`, {
+    const res = await axios.post(`/api/questionForExam?courseId=${idOfCourse}&testId=${testId}`, {
       questionText: inputsValues.questionText,
       questionBankId: inputsValues.questionsBankId,
       questionSection: inputsValues.questionSection,

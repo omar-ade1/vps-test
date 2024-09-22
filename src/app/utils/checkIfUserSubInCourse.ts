@@ -2,7 +2,6 @@ import Swal from "sweetalert2";
 import { GET_SINGLE_COURSE } from "../fetchApi/our-course/getSingleCourse";
 import { CoruseWithSections } from "./interfaces/ourCourses";
 import axios from "axios";
-import { DOMAIN_NAME } from "./domainName";
 import { jwtPayLoad } from "./interfaces/jwtPayload";
 import { GET_SINGLE_USER } from "../fetchApi/user/getSingleUser";
 
@@ -27,7 +26,7 @@ interface UserData {
 
 // get token data from server
 export const getTokenData = async () => {
-  const message: any = await axios.get(`${DOMAIN_NAME}/api/token`);
+  const message: any = await axios.get(`/api/token`);
   if (message.request.status == 200) {
     return message.data.message;
   } else {

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { GET_SINGLE_COURSE } from "@/app/fetchApi/our-course/getSingleCourse";
 import { GET_SINGLE_USER } from "@/app/fetchApi/user/getSingleUser";
-import { DOMAIN_NAME } from "@/app/utils/domainName";
 import { jwtPayLoad } from "@/app/utils/interfaces/jwtPayload";
 import { CoruseWithSections } from "@/app/utils/interfaces/ourCourses";
 import axios from "axios";
@@ -51,7 +50,7 @@ export default function RootLayout({ children, params }: { children: any; params
 
   // get token data from server
   const getTokenData = async () => {
-    const message: any = await axios.get(`${DOMAIN_NAME}/api/token`);
+    const message: any = await axios.get(`/api/token`);
     if (message.request.status == 200) {
       setTokenData(message.data.message);
     } else {

@@ -12,7 +12,6 @@ import UpdateOrDeletePart from "./components/UpdateOrDeletePart";
 import MediaSection from "./components/MediaSection";
 import AddMediaSectionBtn from "./components/AddMediaSectionBtn";
 import axios from "axios";
-import { DOMAIN_NAME } from "@/app/utils/domainName";
 import { jwtPayLoad } from "@/app/utils/interfaces/jwtPayload";
 
 interface Props {
@@ -88,7 +87,7 @@ const IdPage = ({ params }: Props) => {
   }, [reload]);
 
   const getToken = async () => {
-    const message: any = await axios.get(`${DOMAIN_NAME}/api/token`);
+    const message: any = await axios.get(`/api/token`);
     if (message.request.status === 200) {
       setTokenData(message.data.message);
     } else {

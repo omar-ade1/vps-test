@@ -1,4 +1,3 @@
-import { DOMAIN_NAME } from "@/app/utils/domainName";
 import axios from "axios";
 
 interface InputValues {
@@ -18,7 +17,7 @@ export const UPDATE_MEDIA_SECTION = async (
 ) => {
   try {
     const res = await axios.put(
-      `${DOMAIN_NAME}/api/mediaSection/${mediaSectionId}?courseId=${idOfCourse}&sectionId=${sectionId}&partOfSectionId=${partOfSectionId}&mediaSectionId=${mediaSectionId}&type=${type}`,
+      `/api/mediaSection/${mediaSectionId}?courseId=${idOfCourse}&sectionId=${sectionId}&partOfSectionId=${partOfSectionId}&mediaSectionId=${mediaSectionId}&type=${type}`,
       {
         title: inputsValues.title,
         details: inputsValues.details,

@@ -1,4 +1,3 @@
-import { DOMAIN_NAME } from "@/app/utils/domainName";
 import axios from "axios";
 
 interface inputsValues {
@@ -11,7 +10,7 @@ export const ADD_COURSE = async (formData:any) => {
   try {
 
     // استخدم formData مباشرة في طلب Axios
-    const res = await axios.post(`${DOMAIN_NAME}/api/our-course`, formData, {
+    const res = await axios.post(`/api/our-course`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

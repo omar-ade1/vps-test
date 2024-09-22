@@ -1,4 +1,3 @@
-import { DOMAIN_NAME } from "@/app/utils/domainName";
 import axios from "axios";
 
 interface InputsValues {
@@ -14,7 +13,7 @@ interface InputsValues {
 
 export const UPDATE_QUESTION_FROM_EXAM = async (idOfCourse: string, testId: string, questionId: number, inputsValues: InputsValues) => {
   try {
-    const res = await axios.put(`${DOMAIN_NAME}/api/questionForExam/${questionId}?courseId=${idOfCourse}&testId=${testId}&deleteOrUpdate=update`, {
+    const res = await axios.put(`/api/questionForExam/${questionId}?courseId=${idOfCourse}&testId=${testId}&deleteOrUpdate=update`, {
       questionText: inputsValues.questionText,
       questionBankId: inputsValues.questionsBankId,
       questionSection: inputsValues.questionSection,

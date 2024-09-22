@@ -1,4 +1,3 @@
-import { DOMAIN_NAME } from "@/app/utils/domainName";
 import axios from "axios";
 
 interface inputsValues {
@@ -8,7 +7,7 @@ interface inputsValues {
 
 export const ADD_SECTION_IN_COURSE = async (inputsValues: inputsValues, idOfCourse: string) => {
   try {
-    const res = await axios.post(`${DOMAIN_NAME}/api/addSectionInCourse?courseId=${idOfCourse}`, {
+    const res = await axios.post(`/api/addSectionInCourse?courseId=${idOfCourse}`, {
       title: inputsValues.title,
       details: inputsValues.details,
     });
