@@ -163,6 +163,7 @@ export async function POST(request: NextRequest) {
 
     // While Error
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ message: "خطأ داخلي في السيرفر" }, { status: 500 });
   }
 }
