@@ -21,6 +21,7 @@
     "argon2": "^0.40.3",
     "axios": "^1.7.3",
     "cookie": "^0.6.0",
+    "cors": "^2.8.5",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.3.19",
     "fullpage.js": "^4.0.26",
