@@ -99,7 +99,7 @@ const OurCourses: React.FC<Props> = ({ setLoadingCoursesData }) => {
                   </Card>
                 </SwiperSlide>
               );
-            })}
+            })} 
           </Swiper>
         </div>
       </div>
