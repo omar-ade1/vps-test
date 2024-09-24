@@ -17,7 +17,7 @@ const nextConfig = {
     ];
   },
   images: {
-    remotePatterns: [],
+    remotePatterns: ["el-lufzy.com"],
   },
 };
 
