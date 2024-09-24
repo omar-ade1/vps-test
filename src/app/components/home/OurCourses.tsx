@@ -81,7 +81,7 @@ const OurCourses: React.FC<Props> = ({ setLoadingCoursesData }) => {
                         src={`/${process.env.NEXT_PUBLIC_PATH_FOR_IMAGE_COURSES}/${course.courseImg}`}
                         unoptimized
                       />
-                    </CardBody>
+                    </CardBody> 
  
                     <CardFooter>
                       <Button
