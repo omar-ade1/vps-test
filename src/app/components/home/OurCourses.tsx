@@ -78,7 +78,7 @@ const OurCourses: React.FC<Props> = ({ setLoadingCoursesData }) => {
                         className="object-cover rounded-xl max-w-full w-[400px] block"
                         width={200}
                         height={200}
-                        src={`${process.env.NEXT_PUBLIC_DOMIN_NAME}/${process.env.NEXT_PUBLIC_PATH_FOR_IMAGE_COURSES}/${course.courseImg}`}
+                        src={`${process.env.NEXT_PUBLIC_DOMAIN_NAME}/${process.env.NEXT_PUBLIC_PATH_FOR_IMAGE_COURSES}/${course.courseImg}`}
                         unoptimized
                       />
                     </CardBody>
