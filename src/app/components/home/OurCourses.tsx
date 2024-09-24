@@ -82,7 +82,7 @@ const OurCourses: React.FC<Props> = ({ setLoadingCoursesData }) => {
                         unoptimized
                       />
                     </CardBody>
-  
+   
                     <CardFooter>
                       <Button
                         fullWidth
