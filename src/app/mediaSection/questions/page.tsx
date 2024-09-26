@@ -9,6 +9,7 @@ import { GET_QUESTION_FOR_EXAM } from "@/app/fetchApi/questionForExam/getQuestio
 import Swal from "sweetalert2";
 import Loader from "@/app/components/Loading/Loader";
 import Empty from "@/app/components/empty/Empty";
+import AddQuizByJson from "./components/addQuizsByJson/AddQuizByJson";
 
 interface QuestionData {
   Question: {
@@ -92,7 +93,10 @@ const QuestionsPage = () => {
             );
           })}
 
-          <AddQuizBtn setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
+            <AddQuizBtn setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
+            <div className="mt-5">
+                <AddQuizByJson setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
+              </div>
         </div>
       ) : (
         <div>
@@ -102,6 +106,10 @@ const QuestionsPage = () => {
           >
             <div className="mt-4">
               <AddQuizBtn setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
+
+              <div className="mt-5">
+                <AddQuizByJson setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
+              </div>
             </div>
           </Empty>
         </div>

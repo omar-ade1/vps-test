@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 interface InputsValues {
   questionText: string;
   questionsBankId: number;
