@@ -11,7 +11,7 @@ import { z } from "zod";
  */
 interface Body {
   questionText: string;
-  questionBankId: number;
+  // questionBankId: number;
   questionSection: string;
   answer1?: string;
   answer2?: string;
@@ -35,19 +35,20 @@ export async function POST(request: NextRequest) {
     // Get Id Of Course And Test
     const courseId = request.nextUrl.searchParams.get("courseId");
     const testId = request.nextUrl.searchParams.get("testId");
+    const questionBankId = request.nextUrl.searchParams.get("questionBankId");
 
     // Check The Ids
-    if (!courseId || !testId) {
+    if (!courseId || !testId || !questionBankId) {
       return NextResponse.json({ message: "البيانات الخاصة بالطلب غير كاملة" }, { status: 400 });
     }
 
     // Check If Id Is Able To Convert To Number
     try {
-      if (isNaN(parseInt(courseId)) || isNaN(parseInt(testId))) {
+      if (isNaN(parseInt(courseId)) || isNaN(parseInt(testId)) || isNaN(parseInt(questionBankId))) {
         throw new Error("Invalid ID");
       }
     } catch (error) {
-      return NextResponse.json({ message: "ال Id الخاص ب الدورة او القسم غير صالح" }, { status: 400 });
+      return NextResponse.json({ message: "ال Id الخاص ب الدورة او القسم أو بنك الاسئلة غير صالح " }, { status: 400 });
     }
 
     // GET USER BY ID IN TOKEN
@@ -75,6 +76,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "لا يوجد اختبار بهذا ال ID" }, { status: 404 });
     }
 
+    // CHECK QUESTION BANK EXIST
+    const checkQuestionBank = await prisma.questionBank.findUnique({
+      where: {
+        id: parseInt(questionBankId),
+      },
+    });
+
+    if (!checkQuestionBank) {
+      return NextResponse.json({ message: "لا يوجد بنك الاسئلة بهذا ال ID" }, { status: 404 });
+    }
+
     const body: body2 = await request.json();
     const jsonData: Body[] = body.jsonData; // استخرج jsonData
 
@@ -85,9 +97,9 @@ export async function POST(request: NextRequest) {
           .string()
           .min(1, { message: "يجب أن يحتوي السؤال على نص" })
           .min(3, { message: "يجب أن يكون نص السؤال مكونًا من 3 أحرف على الأقل" }),
-        questionBankId: z
-          .number({ required_error: "يجب أن يحتوي السؤال على معرف بنك" })
-          .min(1, { message: "يجب أن يكون معرف بنك الأسئلة أكبر من أو يساوي 1" }),
+        // questionBankId: z
+        //   .number({ required_error: "يجب أن يحتوي السؤال على معرف بنك" })
+        //   .min(1, { message: "يجب أن يكون معرف بنك الأسئلة أكبر من أو يساوي 1" }),
         questionSection: z.string({ required_error: "يجب أن يحتوي السؤال على قسم" }).min(1, { message: "يجب تحديد القسم الخاص بالسؤال" }),
         answer1: z.string({ required_error: "يجب أن يحتوي السؤال على اجابة" }).optional(),
         answer2: z.string({ required_error: "يجب أن يحتوي السؤال على اجابة" }).optional(),
@@ -113,7 +125,8 @@ export async function POST(request: NextRequest) {
       const addQuizByJson = await prisma.question.create({
         data: {
           questionText: jsonData[i].questionText,
-          questionBankId: jsonData[i].questionBankId,
+          // questionBankId: jsonData[i].questionBankId,
+          questionBankId: parseInt(questionBankId),
           questionSection: jsonData[i].questionSection,
           answer1: jsonData[i].answer1,
           answer2: jsonData[i].answer2,
