@@ -17,10 +17,10 @@ export const UPDATE_QUESTION_FROM_EXAM = async (idOfCourse: string, testId: stri
       questionText: inputsValues.questionText,
       questionBankId: inputsValues.questionsBankId,
       questionSection: inputsValues.questionSection,
-      answer1: inputsValues.answer1,
-      answer2: inputsValues.answer2,
-      answer3: inputsValues.answer3,
-      answer4: inputsValues.answer4,
+      answer1: inputsValues.answer1 || "",
+      answer2: inputsValues.answer2 || "",
+      answer3: inputsValues.answer3 || "",
+      answer4: inputsValues.answer4 || "",
       answerTrue: inputsValues.answerTrue,
     });
     return res;
