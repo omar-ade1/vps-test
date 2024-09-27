@@ -1,4 +1,6 @@
 "use client";
+import { Cairo } from "next/font/google";
+const cairo = Cairo({ subsets: ["latin"] });
 
 import { GET_QUESTION_BANK } from "@/app/fetchApi/questionBank/getAllQuestionBank";
 import { DELETE_QUESTION_FROM_EXAM } from "@/app/fetchApi/questionForExam/deleteQuestionFromExam";
@@ -23,6 +25,7 @@ import {
   SelectItem,
   AutocompleteItem,
   Autocomplete,
+  Textarea,
 } from "@nextui-org/react";
 
 import React, { SetStateAction, useEffect, useState } from "react";
@@ -244,7 +247,7 @@ const QuizBox: React.FC<Props> = ({ dataQuiz, courseId, mediaSectionId, testId, 
                   </div>
 
                   <div>
-                    <Input
+                    <Textarea
                       value={inputsValues.questionText}
                       onChange={(e) => setInputsValues((prev) => ({ ...prev, questionText: e.target.value }))}
                       label="السؤال"
@@ -341,15 +344,23 @@ const QuizBox: React.FC<Props> = ({ dataQuiz, courseId, mediaSectionId, testId, 
 
       {/* Start Quiz */}
       <div className="quiz">
-        <h3 className="font-bold text-xl my-5 text-center">
+        <pre className={`${cairo.className} font-bold text-xl my-5 text-center block max-w-full text-wrap`}>
           {`(${i + 1}) `}
           {dataQuiz.questionText}
-        </h3>
+        </pre>
         <div className="answer flex flex-wrap smT0:gap-5 justify-around items-center">
-          <h4 className={`w-1/2 smT0:w-full text-center font-bold p-2 ${dataQuiz.asnwerTrue === 1 ? "bg-success rounded" : ""}`}>أ) {dataQuiz.answer1}</h4>
-          <h4 className={`w-1/2 smT0:w-full text-center font-bold p-2 ${dataQuiz.asnwerTrue === 2 ? "bg-success rounded" : ""}`}>ب) {dataQuiz.answer2}</h4>
-          <h4 className={`w-1/2 smT0:w-full text-center font-bold p-2 ${dataQuiz.asnwerTrue === 3 ? "bg-success rounded" : ""}`}>ج) {dataQuiz.answer3}</h4>
-          <h4 className={`w-1/2 smT0:w-full text-center font-bold p-2 ${dataQuiz.asnwerTrue === 4 ? "bg-success rounded" : ""}`}>د) {dataQuiz.answer4}</h4>
+          <h4 className={`w-1/2 smT0:w-full text-center font-bold p-2 ${dataQuiz.asnwerTrue === 1 ? "bg-success rounded" : ""}`}>
+            أ) {dataQuiz.answer1}
+          </h4>
+          <h4 className={`w-1/2 smT0:w-full text-center font-bold p-2 ${dataQuiz.asnwerTrue === 2 ? "bg-success rounded" : ""}`}>
+            ب) {dataQuiz.answer2}
+          </h4>
+          <h4 className={`w-1/2 smT0:w-full text-center font-bold p-2 ${dataQuiz.asnwerTrue === 3 ? "bg-success rounded" : ""}`}>
+            ج) {dataQuiz.answer3}
+          </h4>
+          <h4 className={`w-1/2 smT0:w-full text-center font-bold p-2 ${dataQuiz.asnwerTrue === 4 ? "bg-success rounded" : ""}`}>
+            د) {dataQuiz.answer4}
+          </h4>
         </div>
       </div>
       {/* End   Quiz */}

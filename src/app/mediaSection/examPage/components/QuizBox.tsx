@@ -1,4 +1,6 @@
 "use client";
+import { Cairo } from "next/font/google";
+const cairo = Cairo({ subsets: ["latin"] });
 
 import { Radio, RadioGroup } from "@nextui-org/react";
 import React, { SetStateAction, useState } from "react";
@@ -35,10 +37,10 @@ const QuizBoxInExamPage: React.FC<Props> = ({ question, i, setUserAnswers }) => 
   return (
     <div className="quiz bg-slate-200 border-2  border-slate-200 p-5">
       <h2 className="text-xl font-bold text-primary">{question.questionSection}</h2>
-      <h3 className="font-bold text-xl my-5 text-center">
+      <pre className={`${cairo.className} font-bold text-xl my-5 text-center block max-w-full text-wrap`}>
         {`(${i + 1}) `}
         {question.questionText}
-      </h3>
+      </pre>
       <div className="answer flex justify-center w-full relative">
         <RadioGroup
           onValueChange={(e) => {
@@ -50,22 +52,22 @@ const QuizBoxInExamPage: React.FC<Props> = ({ question, i, setUserAnswers }) => 
           className="flex justify-around items-center flex-row relative"
         >
           <div className="flex items-center">
-            <Radio value={"1"} />
+            <Radio size="lg" value={"1"} />
             <h4 className={`text-center font-bold p-2`}>أ) {question.answer1}</h4>
           </div>
 
           <div className="flex items-center">
-            <Radio value={"2"} />
+            <Radio size="lg" value={"2"} />
             <h4 className={`text-center font-bold p-2`}>ب) {question.answer2}</h4>
           </div>
 
           <div className="flex items-center">
-            <Radio value={"3"} />
+            <Radio size="lg" value={"3"} />
             <h4 className={`text-center font-bold p-2`}>ج) {question.answer3}</h4>
           </div>
 
           <div className="flex items-center">
-            <Radio value={"4"} />
+            <Radio size="lg" value={"4"} />
             <h4 className={`text-center font-bold p-2`}>د) {question.answer4}</h4>
           </div>
         </RadioGroup>

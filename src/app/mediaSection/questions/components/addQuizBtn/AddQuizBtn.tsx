@@ -1,5 +1,5 @@
 "use client";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Radio, RadioGroup } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input, Radio, RadioGroup, Textarea } from "@nextui-org/react";
 import React, { SetStateAction, useEffect, useState } from "react";
 import { Select, SelectItem } from "@nextui-org/react";
 import { GET_QUESTION_BANK } from "@/app/fetchApi/questionBank/getAllQuestionBank";
@@ -71,7 +71,6 @@ const AddQuizBtn: React.FC<Props> = ({ courseId, mediaSectionId, testId, reload,
     answer4: "",
     answerTrue: 1,
   });
-
 
   // Handel Add Question Function
   const handelAdd = async () => {
@@ -190,7 +189,7 @@ const AddQuizBtn: React.FC<Props> = ({ courseId, mediaSectionId, testId, reload,
                 </div>
 
                 <div>
-                  <Input
+                  <Textarea
                     value={inputsValues.questionText}
                     onChange={(e) => setInputsValues((prev) => ({ ...prev, questionText: e.target.value }))}
                     label="السؤال"
