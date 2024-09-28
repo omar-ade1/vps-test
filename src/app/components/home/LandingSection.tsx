@@ -119,7 +119,7 @@ const LandingSection = () => {
               animate="animate"
               className="font-bold text-3xl xxsm:text-2xl flex justify-center items-center"
             >
-              <span className="font-[logo-font] text-orange-600">هاتف:</span> 0557364408
+              <span className="font-[logo-font] text-orange-600">هاتف:</span> 0557384408
             </motion.h3>
           </div>
           <motion.div

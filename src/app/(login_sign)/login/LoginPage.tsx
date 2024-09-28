@@ -89,6 +89,7 @@ const LoginPage = () => {
       if (message.request.status == 200) {
         setIsLoading(false);
         router.replace("/");
+        router.refresh();
         return Toast.fire({
           icon: "success",
           title: message.data.message,
