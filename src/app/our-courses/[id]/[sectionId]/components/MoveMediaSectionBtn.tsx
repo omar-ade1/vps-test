@@ -10,9 +10,12 @@ import { Toast } from "@/app/utils/alert";
 
 interface Props {
   mediaSectionId: number;
+  reload: boolean;
+  setReload: React.Dispatch<React.SetStateAction<boolean>>;
+  
 }
 
-const MoveMediaSectionBtn: React.FC<Props> = ({ mediaSectionId }) => {
+const MoveMediaSectionBtn: React.FC<Props> = ({ mediaSectionId, reload, setReload }) => {
   const { isOpen: isOpen2, onOpen: onOpen2, onOpenChange: onOpenChange2 } = useDisclosure();
   const [coursesData, setCoursesData] = useState<CoursesData[]>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -58,13 +61,14 @@ const MoveMediaSectionBtn: React.FC<Props> = ({ mediaSectionId }) => {
         Toast.fire({
           title: message.data.message,
           icon: "success",
-        })
-        router.refresh()
+        });
+        router.refresh();
+        setReload(!reload);
       } else {
         Toast.fire({
           title: message.response.data.message,
           icon: "error",
-        })
+        });
       }
     }
   };
@@ -166,7 +170,7 @@ const MoveMediaSectionBtn: React.FC<Props> = ({ mediaSectionId }) => {
                 )}
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onPress={onClose}>
+                <Button color="danger" onPress={onClose}>
                   اغلاق
                 </Button>
 
@@ -178,8 +182,9 @@ const MoveMediaSectionBtn: React.FC<Props> = ({ mediaSectionId }) => {
           )}
         </ModalContent>
       </Modal>
+      
     </>
   );
 };
 
-export default MoveMediaSectionBtn;
+export default MoveMediaSectionBtn

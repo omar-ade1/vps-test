@@ -1,16 +1,13 @@
 import { jwtPayLoad } from "@/app/utils/interfaces/jwtPayload";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Spinner } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaFile, FaVideo } from "react-icons/fa";
 import { FaNoteSticky } from "react-icons/fa6";
 import { FiSettings } from "react-icons/fi";
 import { MdQuiz } from "react-icons/md";
-import { Select, SelectItem } from "@nextui-org/react";
-import { CoursesData, PartOfSection } from "@/app/utils/interfaces/courseParts";
-import { GET_ALL_COURSES } from "@/app/fetchApi/our-course/getCourses";
-import Swal from "sweetalert2";
-import { MOVE_MEDIA_SECTION } from "@/app/fetchApi/moveMediaSection/moveMediaSection";
+import { PartOfSection } from "@/app/utils/interfaces/courseParts";
+
 import MoveMediaSectionBtn from "./MoveMediaSectionBtn";
 
 interface Props {
@@ -29,54 +26,12 @@ interface Props {
   sectionId: string;
   tokenData: jwtPayLoad | undefined;
   partsOfSection: PartOfSection[];
+  reload: boolean;
+  setReload: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MediaSection: React.FC<Props> = ({ partsOfSection, data, courseId, sectionId, tokenData }) => {
+const MediaSection: React.FC<Props> = ({ partsOfSection, data, courseId, sectionId, tokenData, reload, setReload }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { isOpen: isOpen2, onOpen: onOpen2, onOpenChange: onOpenChange2 } = useDisclosure();
-
-  const [coursesData, setCoursesData] = useState<CoursesData[]>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [sectionInMove, setSectionInMove] = useState<number>(1);
-
-  const [courseIdInMove, setCourseIdInMove] = useState<string>("");
-  const [sectionIdInMove, setSectionIdInMove] = useState<string>("");
-  const [partOfSectionIdInMove, setPartOfSectionIdInMove] = useState<string>("");
-
-  const handelGetCoursesData = async () => {
-    setIsLoading(true);
-    const message: any = await GET_ALL_COURSES();
-    console.log(message);
-
-    if (message.request.status === 200) {
-      setCoursesData(message.data.message);
-    } else {
-      Swal.fire({
-        title: message.response.data.message,
-        icon: "error",
-      });
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    if (!courseIdInMove.length) {
-      setSectionInMove(1);
-    }
-  }, [courseIdInMove]);
-
-  useEffect(() => {
-    if (!sectionIdInMove.length) {
-      setSectionInMove(2);
-    }
-  }, [sectionIdInMove]);
-
-  const handelMoveMediaSection = async () => {
-    if (courseIdInMove && sectionIdInMove && partOfSectionIdInMove) {
-      const message: any = await MOVE_MEDIA_SECTION(courseIdInMove, sectionIdInMove, partOfSectionIdInMove, data.id);
-      console.log(message);
-    }
-  };
   return (
     <div className="border p-2 rounded-xl shadow-xl bg-primary-100">
       <Button
@@ -263,8 +218,7 @@ const MediaSection: React.FC<Props> = ({ partsOfSection, data, courseId, section
           )}
         </ModalContent>
       </Modal> */}
-
-      <MoveMediaSectionBtn mediaSectionId={data.id} />
+      {tokenData?.isAdmin === true && <MoveMediaSectionBtn reload={reload} setReload={setReload} mediaSectionId={data.id} />}
     </div>
   );
 };

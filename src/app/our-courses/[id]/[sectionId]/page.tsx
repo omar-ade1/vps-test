@@ -103,7 +103,6 @@ const IdPage = ({ params }: Props) => {
   useEffect(() => {
     getToken();
   }, []);
-  
 
   return (
     <main className="min-h-[calc(100vh-64px)] py-[50px] relative">
@@ -162,7 +161,18 @@ const IdPage = ({ params }: Props) => {
                       {part.GroupOfSection.length ? (
                         <div className="grid gap-5">
                           {part.GroupOfSection.map((f) => {
-                            return <MediaSection partsOfSection={sectionData.partOfSection}  tokenData={tokenData} courseId={params.id} sectionId={params.sectionId} data={f} key={f.id} />;
+                            return (
+                              <MediaSection
+                                setReload={setReload}
+                                reload={reload}
+                                partsOfSection={sectionData.partOfSection}
+                                tokenData={tokenData}
+                                courseId={params.id}
+                                sectionId={params.sectionId}
+                                data={f}
+                                key={f.id}
+                              />
+                            );
                           })}
                         </div>
                       ) : (
