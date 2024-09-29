@@ -37,6 +37,11 @@ export async function GET(request: NextRequest) {
             userName: true,
           },
         },
+        sections: {
+          include: {
+            partOfSection: true,
+          }
+        }
       },
     });
 

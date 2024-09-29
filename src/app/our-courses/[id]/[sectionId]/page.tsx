@@ -13,6 +13,7 @@ import MediaSection from "./components/MediaSection";
 import AddMediaSectionBtn from "./components/AddMediaSectionBtn";
 import axios from "axios";
 import { jwtPayLoad } from "@/app/utils/interfaces/jwtPayload";
+import { SectionData } from "@/app/utils/interfaces/courseParts";
 
 interface Props {
   params: {
@@ -21,39 +22,39 @@ interface Props {
   };
 }
 
-interface GroupOfSection {
-  id: number;
-  title: string;
-  type: string;
-  details: string;
-  createdAt: string;
-  updatedAt: string;
-  partOfSection: string;
-  partOfSectionId: number;
-  testId: number | null;
-  videoId: number | null;
-  fileId: number | null;
-  noteId: number | null;
-}
+// interface GroupOfSection {
+//   id: number;
+//   title: string;
+//   type: string;
+//   details: string;
+//   createdAt: string;
+//   updatedAt: string;
+//   partOfSection: string;
+//   partOfSectionId: number;
+//   testId: number | null;
+//   videoId: number | null;
+//   fileId: number | null;
+//   noteId: number | null;
+// }
 
-interface PartOfSection {
-  id: number;
-  title: string;
-  Section: string;
-  sectionId: number;
-  details: string;
-  createdAt: string;
-  updatedAt: string;
-  GroupOfSection: GroupOfSection[];
-}
+// interface PartOfSection {
+//   id: number;
+//   title: string;
+//   Section: string;
+//   sectionId: number;
+//   details: string;
+//   createdAt: string;
+//   updatedAt: string;
+//   GroupOfSection: GroupOfSection[];
+// }
 
-interface SectionData {
-  courseId: number;
-  id: number;
-  details: string;
-  title: string;
-  partOfSection: PartOfSection[];
-}
+// interface SectionData {
+//   courseId: number;
+//   id: number;
+//   details: string;
+//   title: string;
+//   partOfSection: PartOfSection[];
+// }
 
 const IdPage = ({ params }: Props) => {
   const [sectionData, setSectionData] = useState<SectionData>();
@@ -102,6 +103,7 @@ const IdPage = ({ params }: Props) => {
   useEffect(() => {
     getToken();
   }, []);
+  
 
   return (
     <main className="min-h-[calc(100vh-64px)] py-[50px] relative">
@@ -160,7 +162,7 @@ const IdPage = ({ params }: Props) => {
                       {part.GroupOfSection.length ? (
                         <div className="grid gap-5">
                           {part.GroupOfSection.map((f) => {
-                            return <MediaSection tokenData={tokenData} courseId={params.id} sectionId={params.sectionId} data={f} key={f.id} />;
+                            return <MediaSection partsOfSection={sectionData.partOfSection}  tokenData={tokenData} courseId={params.id} sectionId={params.sectionId} data={f} key={f.id} />;
                           })}
                         </div>
                       ) : (
