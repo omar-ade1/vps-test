@@ -39,3 +39,18 @@ export interface CoursesData {
   courseImg: string;
   sections: SectionData[];
 }
+
+export interface Question {
+  id: number;
+  questionBankId: number;
+  testId: number;
+  questionText: string;
+  questionSection: string;
+  createdAt: string;
+  updatedAt: string;
+  answer1: string;
+  answer2: string;
+  answer3: string;
+  answer4: string;
+  asnwerTrue: number;
+}

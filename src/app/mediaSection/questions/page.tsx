@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import Loader from "@/app/components/Loading/Loader";
 import Empty from "@/app/components/empty/Empty";
 import AddQuizByJson from "./components/addQuizsByJson/AddQuizByJson";
+import AddQuizBtnFromQuizBank from "./components/addQuizBtnFromQuizBank/AddQuizBtnFromQuizBank";
 
 interface QuestionData {
   Question: {
@@ -69,7 +70,7 @@ const QuestionsPage = () => {
   }, [reload]);
 
   return (
-    <main className="min-h-[calc(100vh-64px)] pt-[50px] pb-[100px] relative">
+    <main className="min-h-[calc(100vh-0px)] pt-[50px] pb-[100px] relative">
       <TitleForPage titleText="إدارة الأسئلة" />
 
       {isLoading ? (
@@ -77,7 +78,7 @@ const QuestionsPage = () => {
       ) : questionsData.length ? (
         <div className="container relative z-10 grid gap-5 my-5">
           <AddQuizBtn setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
-
+          <AddQuizBtnFromQuizBank setReload={setReload} reload={reload} />
           {questionsData.map((question, i) => {
             return (
               <QuizBox
@@ -93,10 +94,11 @@ const QuestionsPage = () => {
             );
           })}
 
-            <AddQuizBtn setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
-            <div className="mt-5">
-                <AddQuizByJson setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
-              </div>
+          <AddQuizBtn setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
+          <AddQuizBtnFromQuizBank setReload={setReload} reload={reload} />
+          <div className="mt-5">
+            <AddQuizByJson setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
+          </div>
         </div>
       ) : (
         <div>
@@ -106,6 +108,7 @@ const QuestionsPage = () => {
           >
             <div className="mt-4">
               <AddQuizBtn setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />
+              <AddQuizBtnFromQuizBank setReload={setReload} reload={reload} />
 
               <div className="mt-5">
                 <AddQuizByJson setReload={setReload} reload={reload} courseId={courseId} mediaSectionId={mediaSectionId} testId={testId} />

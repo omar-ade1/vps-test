@@ -102,5 +102,8 @@ export default function RootLayout({ children }: any) {
     }
   }, [userData, courseData]);
 
-  return <div className="min-h-[calc(100vh-64px)] py-[50px] relative">{isLoading ? <Loader /> : <main>{children}</main>}</div>;
+  return <div className="min-h-[calc(100vh-64px)] py-[50px] relative">{isLoading ? <Loader /> : <main>
+    {children}
+    
+  </main>}</div>;
 }

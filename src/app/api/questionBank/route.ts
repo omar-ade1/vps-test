@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Get All Question Bank From Database
-    const questionBank = await prisma.questionBank.findMany();
+    const questionBank = await prisma.questionBank.findMany({ include: { questions: true } });
 
     // Return The Question Bank To The Client
     return NextResponse.json({ message: questionBank }, { status: 200 });

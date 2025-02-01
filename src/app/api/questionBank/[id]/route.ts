@@ -18,6 +18,8 @@ export async function GET(request: NextRequest, { params }: Params) {
       return NextResponse.json({ message: "تم رفض الطلب : غير مصرح لك بهذا الطلب" }, { status: 403 });
     }
 
+    const page = request.nextUrl.searchParams.get("page") || "1";
+
     // Check If Id Is Able To Convert To Number
     try {
       if (isNaN(parseInt(params.id))) {
@@ -32,12 +34,25 @@ export async function GET(request: NextRequest, { params }: Params) {
       where: {
         id: parseInt(params.id),
       },
+      include: {
+        questions: {
+          take: 20,
+          skip: (parseInt(page) - 1) * 20,
+        },
+        _count: {
+          select: {
+            questions: true,
+          },
+        },
+      },
     });
 
     // Check QuestionBank Exists
     if (!questionBank) {
       return NextResponse.json({ message: "لا يوجد بنك اسئلة بهذا ال ID" }, { status: 404 });
     }
+
+    console.log(questionBank.questions);
 
     // Return QuestionBank
     return NextResponse.json({ message: questionBank }, { status: 200 });
@@ -132,6 +147,11 @@ export async function PUT(request: NextRequest, { params }: Params) {
   }
 }
 
+/*
+ * Method : DELETE
+ * Url : /api/questionForExam/${id}
+ * Private : private (If User Is Admin)
+ */
 export async function DELETE(request: NextRequest, { params }: Params) {
   try {
     // Check Token IS ADMIN
@@ -155,7 +175,7 @@ export async function DELETE(request: NextRequest, { params }: Params) {
         id: parseInt(params.id),
       },
     });
-    
+
     // Check if Question Bank Exists
     if (!checkQuestionBank) {
       return NextResponse.json({ message: "لا يوجد بنك اسئلة بهذا ال ID" }, { status: 404 });

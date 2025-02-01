@@ -15,9 +15,13 @@ interface QuestionBankData {
 }
 
 const ReviewQuestionBank = () => {
+  // state for question Bank data
   const [questionBankData, setQuestionBankData] = useState<QuestionBankData[]>([]);
+
+  // For Loading Page
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // Get Question Banks Data
   const getQuestionBank = async () => {
     setIsLoading(true);
     const message: any = await GET_QUESTION_BANK();
@@ -32,6 +36,7 @@ const ReviewQuestionBank = () => {
     setIsLoading(false);
   };
 
+  // Get Question Bank Data When Page Load
   useEffect(() => {
     getQuestionBank();
   }, []);
@@ -51,7 +56,7 @@ const ReviewQuestionBank = () => {
                   className="box shadow-xl rounded-xl p-5 bg-gray-300 border-2 border-gray-400 h-[250px] flex flex-col justify-center gap-2"
                 >
                   <h2 className="text-center bg-white p-5 rounded-xl text-xl font-extrabold my-5">{bank.name}</h2>
-                  <Button as={Link} href="#" fullWidth size="lg" color="primary" className="text-xl font-bold h-fit p-5">
+                  <Button as={Link} href={`/mangement/questionBank/review/${bank.id}?numberOfPage=1`} fullWidth size="lg" color="primary" className="text-xl font-bold h-fit p-5">
                     استعراض
                   </Button>
                 </div>
