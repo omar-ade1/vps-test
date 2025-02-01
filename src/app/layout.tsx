@@ -8,7 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 
 const cairo = Cairo({ subsets: ["latin"] });
-
+ 
 export const metadata: Metadata = {
   title: "El-Lufzy | أ/عادل عاشور",
   description: "موقع الاستاذ عادل عاشور للاختبارات اللفظية في القدرات العامة",
