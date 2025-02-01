@@ -7,8 +7,9 @@ import Swal from "sweetalert2";
 import { TbError404 } from "react-icons/tb";
 import QuizAction from "./components/QuizAction";
 import { Question } from "@/app/utils/interfaces/courseParts";
-
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { Toast } from "@/app/utils/alert";
+import { GET_BANKS_WITHOUT_QUESTION } from "@/app/fetchApi/questionBank/getBankWithOutQuestion";
 
 interface Bank {
   id: number;
@@ -19,6 +20,10 @@ interface Bank {
   _count: {
     questions: number;
   };
+}
+interface QuestionBankData {
+  id: number;
+  name: string;
 }
 
 const ViewQuestionBank = ({ params }: { params: { id: string } }) => {
@@ -38,6 +43,36 @@ const ViewQuestionBank = ({ params }: { params: { id: string } }) => {
   const pathname = usePathname(); // let's get the pathname to make the component reusable - could be used anywhere in the project
   const router = useRouter();
   const currentSearchParams = useSearchParams();
+
+
+  const [questionBankData, setQuestionBankData] = useState<QuestionBankData[]>([]);
+
+  // Handel Get Question Bank Data
+  const getQuestionBank = async () => {
+    const message: any = await GET_BANKS_WITHOUT_QUESTION();
+
+    // While Succeed
+    if (message.request.status === 200) {
+      setQuestionBankData(message.data.message);
+
+      // Whill Error
+    } else {
+      Toast.fire({
+        title: message.response.data.message,
+        icon: "error",
+      });
+    }
+  };
+
+  // Run Get Question Bank Function
+  useEffect(() => {
+    getQuestionBank();
+  }, []);
+
+
+
+
+
 
   // Handel Get Single Bank Data With Questions
   const getSingleBank = async () => {
@@ -81,6 +116,7 @@ const ViewQuestionBank = ({ params }: { params: { id: string } }) => {
 
   // Run Get Single Bank Function When Id Of Bank Or Number Of Current Page Changes
   useEffect(() => {
+    console.log("from id");
     getSingleBank();
   }, [idOfBank, numberOfCurrentPage, reload]);
 
@@ -96,7 +132,7 @@ const ViewQuestionBank = ({ params }: { params: { id: string } }) => {
               <div className="box bg-slate-200 border-2 border-slate-200 p-5">
                 <div className="flex justify-between items-center">
                   <h2 className="text-xl font-bold text-primary">{question.questionSection}</h2>
-                  <QuizAction reload={reload} setReload={setReload} questionData={question} bankData={questionBank} numberOfCurrentPage={numberOfCurrentPage} setNumberOfCurrentPage={setNumberOfCurrentPage} />
+                  <QuizAction banksData={questionBankData} reload={reload} setReload={setReload} questionData={question} bankData={questionBank} numberOfCurrentPage={numberOfCurrentPage} setNumberOfCurrentPage={setNumberOfCurrentPage} />
                 </div>
 
                 <pre className={` font-bold text-xl my-5 text-center block max-w-full text-wrap`}>

@@ -1,7 +1,5 @@
-import { GET_QUESTION_BANK } from "@/app/fetchApi/questionBank/getAllQuestionBank";
 import { DELETE_QUESTION_FROM_QUESTION_BANK } from "@/app/fetchApi/questionBank/question/deleteQuestion";
 import { UPDATE_QUESTION_FROM_QUESTION_BANK } from "@/app/fetchApi/questionBank/question/updateQuestion";
-import { UPDATE_QUESTION_FROM_EXAM } from "@/app/fetchApi/questionForExam/updateQuestionExam";
 import { Toast } from "@/app/utils/alert";
 import { Question } from "@/app/utils/interfaces/courseParts";
 import {
@@ -53,6 +51,7 @@ interface Props {
   setReload: React.Dispatch<SetStateAction<boolean>>;
   numberOfCurrentPage: string;
   setNumberOfCurrentPage: React.Dispatch<SetStateAction<string>>;
+  banksData: { id: number; name: string }[];
 }
 interface InputValues {
   questionText: string;
@@ -64,12 +63,8 @@ interface InputValues {
   answer4?: string;
   answerTrue: number;
 }
-interface QuestionBankData {
-  id: number;
-  name: string;
-}
 
-const QuizAction: React.FC<Props> = ({ questionData, reload, setReload, bankData, numberOfCurrentPage, setNumberOfCurrentPage }) => {
+const QuizAction: React.FC<Props> = ({ questionData, reload, setReload, bankData, numberOfCurrentPage, setNumberOfCurrentPage,banksData }) => {
   // For Update Modal
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -87,30 +82,6 @@ const QuizAction: React.FC<Props> = ({ questionData, reload, setReload, bankData
     answer4: questionData.answer4,
     answerTrue: questionData.asnwerTrue,
   });
-
-  const [questionBankData, setQuestionBankData] = useState<QuestionBankData[]>([]);
-
-  // Handel Get Question Bank Data
-  const getQuestionBank = async () => {
-    const message: any = await GET_QUESTION_BANK();
-
-    // While Succeed
-    if (message.request.status === 200) {
-      setQuestionBankData(message.data.message);
-
-      // Whill Error
-    } else {
-      Toast.fire({
-        title: message.response.data.message,
-        icon: "error",
-      });
-    }
-  };
-
-  // Run Get Question Bank Function
-  useEffect(() => {
-    getQuestionBank();
-  }, []);
 
   // handel Update Quiz Function
   const handelUpdate = async () => {
@@ -186,7 +157,7 @@ const QuizAction: React.FC<Props> = ({ questionData, reload, setReload, bankData
 
   useEffect(() => {
     console.log(bankData.questions.length);
-    
+
     if (bankData.questions.length < 1 || !bankData.questions) {
       if (parseInt(numberOfCurrentPage) > 1) {
         setNumberOfCurrentPage(String(parseInt(numberOfCurrentPage) - 1));
@@ -256,7 +227,7 @@ const QuizAction: React.FC<Props> = ({ questionData, reload, setReload, bankData
                     label="اختر بنك الاسئلة"
                     defaultSelectedKeys={String(inputsValues.questionsBankId)}
                   >
-                    {questionBankData.map((bank) => (
+                    {banksData.map((bank) => (
                       <SelectItem variant="shadow" color="primary" key={bank.id}>
                         {bank.name}
                       </SelectItem>
