@@ -214,7 +214,7 @@ const QuizAction: React.FC<Props> = ({ questionData, reload, setReload, bankData
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
-        <ModalContent>
+        <ModalContent> 
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-xl font-bold">تعديل السؤال</ModalHeader>
