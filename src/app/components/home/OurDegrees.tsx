@@ -32,13 +32,15 @@ const OurDegrees: React.FC<Props> = ({ setLoadingDegreeImg }) => {
   };
 
   useEffect(() => {
+    console.log(true);
+    
     handelGetUrls();
   }, []);
 
   return (
     <section id="our-degrees" className="container">
       <div className="relative w-fit mx-auto text-center flex justify-center items-center flex-col">
-        <Image className="absolute w-3/4 block mx-auto" src={backgroundTitle} alt="background title" />
+        <Image priority quality={70} className="absolute w-3/4 block mx-auto" src={backgroundTitle} alt="background title" />
         <h2 className="relative font-[logo-font] text-5xl text-orange-600">درجــات طــلابــنــا</h2>
       </div>
       <div className=" mt-[50px]">
@@ -59,7 +61,7 @@ const OurDegrees: React.FC<Props> = ({ setLoadingDegreeImg }) => {
           {imgsUrl?.map((img) => {
             return (
               <SwiperSlide key={img.id} className="!flex relative justify-center items-center text-xl font-bold">
-                <Image className="shadow-xl rounded-xl border block" width={650} height={100} src={`/uploads/${img.imgUrl}`} alt="" />
+                <Image loading="lazy" quality={70} className="shadow-xl rounded-xl border block" width={650} height={100} src={`/uploads/${img.imgUrl}`} alt="course image" />
               </SwiperSlide>
             );
           })}

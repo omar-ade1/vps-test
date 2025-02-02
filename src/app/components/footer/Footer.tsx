@@ -52,15 +52,15 @@ const Footer = () => {
 
         <div className="flex items-center gap-2 w-fit mx-auto mt-5">
           <Link className="block w-fit  p-2 rounded-xl hover:bg-white transition-colors duration-300" href={"#"}>
-            <Image className="w-[50px]" src={facebookIcon} alt="facebook"></Image>
+            <Image loading="lazy" className="w-[50px]" src={facebookIcon} alt="facebook"></Image>
           </Link>
 
           <Link className="block w-fit  p-2 rounded-xl hover:bg-white transition-colors duration-300" href={"#"}>
-            <Image className="w-[50px]" src={whatsappIcon} alt="whatsapp"></Image>
+            <Image loading="lazy" className="w-[50px]" src={whatsappIcon} alt="whatsapp"></Image>
           </Link>
 
           <Link className="block w-fit  p-2 rounded-xl hover:bg-white transition-colors duration-300" href={"#"}>
-            <Image className="w-[50px]" src={telegramIcon} alt="whatsapp"></Image>
+            <Image loading="lazy" className="w-[50px]" src={telegramIcon} alt="whatsapp"></Image>
           </Link>
         </div>
 
@@ -68,9 +68,14 @@ const Footer = () => {
 
         <div>
           <p className="text-white font-[l] text-xl w-fit mx-auto">كـل الـحـقـوق مـحـفـوظـة 2024 ©</p>
-          <p dir="ltr" className="flex gap-2 items-center text-white font-[l] text-xl w-fit mx-auto capitalize">{`${"< Developed By>"}`} <Link href={"tel:+201011424410"} className="block text-orange-500"> omar adel</Link></p>
+          <p dir="ltr" className="flex gap-2 items-center text-white font-[l] text-xl w-fit mx-auto capitalize">
+            {`${"< Developed By>"}`}{" "}
+            <Link href={"tel:+201011424410"} className="block text-orange-500">
+              {" "}
+              omar adel
+            </Link>
+          </p>
         </div>
-
       </div>
     </footer>
   );

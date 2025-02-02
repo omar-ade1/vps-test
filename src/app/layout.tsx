@@ -8,12 +8,13 @@ import { Toaster } from "react-hot-toast";
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 
 const cairo = Cairo({ subsets: ["latin"] });
- 
+
 export const metadata: Metadata = {
   title: "El-Lufzy | أ/عادل عاشور",
   description: "موقع الاستاذ عادل عاشور للاختبارات اللفظية في القدرات العامة",
   keywords: "قدرات, قدرات لفظي, عادل عاشور, عادل, اختبارات, اختبارات قدرات, لفظي, el-lufzy, el-lufzy.com, الوجيز, lufzy, كمي, قدرات عامة",
 };
+
 
 export default function RootLayout({
   children,
@@ -23,13 +24,12 @@ export default function RootLayout({
   return (
     <html dir="rtl" lang="en" className="scroll-smooth">
       <head>
-      <link rel="icon" href="/favicon.png" type="image/png" />
-      <link rel="icon" href="/public/favicon.png" type="image/png" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/public/favicon.png" type="image/png" />
       </head>
       <body className={`${cairo.className}`}>
         <Providers>
           <Toaster
-            // position="top-right"
             containerStyle={{
               zIndex: 999999,
             }}
