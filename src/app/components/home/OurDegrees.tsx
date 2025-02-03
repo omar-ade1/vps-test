@@ -31,9 +31,7 @@ const OurDegrees: React.FC<Props> = ({ setLoadingDegreeImg }) => {
     setLoadingDegreeImg(false);
   };
 
-  useEffect(() => {
-    console.log(true);
-    
+  useEffect(() => {    
     handelGetUrls();
   }, []);
 

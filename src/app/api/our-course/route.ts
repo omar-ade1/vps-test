@@ -146,7 +146,8 @@ export async function POST(request: NextRequest) {
       }
 
       // Write The File That Was Uploaded By Input
-      fs.writeFileSync(path.resolve(UPLOAD_DIR, (bodyFormData.file as File).name), buffer);
+      // fs.writeFileSync(path.resolve(UPLOAD_DIR, (bodyFormData.file as File).name), buffer);
+      fs.writeFileSync(path.resolve(UPLOAD_DIR, (bodyFormData.file as File).name), new Uint8Array(buffer));
 
       // While Filed
     } else {

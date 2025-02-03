@@ -142,7 +142,7 @@ export async function PUT(request: NextRequest, { params }: Props) {
       }
 
       // Write The File That Was Uploaded By Input
-      fs.writeFileSync(path.resolve(UPLOAD_DIR, (bodyFormData.file as File).name), buffer);
+      fs.writeFileSync(path.resolve(UPLOAD_DIR, (bodyFormData.file as File).name), new Uint8Array(buffer));
 
       // Delete The Image From System
       fs.unlink(path.join(UPLOAD_DIR, theCourse.courseImg), (err) => {
@@ -212,7 +212,6 @@ export async function PUT(request: NextRequest, { params }: Props) {
 
         // LOOP INTO VIDEO AND UPDATE VIDEO DATA WITH NEW URL AND COURSE NAME
         for (let i = 0; i < videos.count; i++) {
-          console.log(true);
           const singleVideo = await prisma.video.findFirst({
             where: {
               GroupOfSection: {

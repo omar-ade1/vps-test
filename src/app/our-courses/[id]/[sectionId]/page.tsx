@@ -22,39 +22,7 @@ interface Props {
   };
 }
 
-// interface GroupOfSection {
-//   id: number;
-//   title: string;
-//   type: string;
-//   details: string;
-//   createdAt: string;
-//   updatedAt: string;
-//   partOfSection: string;
-//   partOfSectionId: number;
-//   testId: number | null;
-//   videoId: number | null;
-//   fileId: number | null;
-//   noteId: number | null;
-// }
 
-// interface PartOfSection {
-//   id: number;
-//   title: string;
-//   Section: string;
-//   sectionId: number;
-//   details: string;
-//   createdAt: string;
-//   updatedAt: string;
-//   GroupOfSection: GroupOfSection[];
-// }
-
-// interface SectionData {
-//   courseId: number;
-//   id: number;
-//   details: string;
-//   title: string;
-//   partOfSection: PartOfSection[];
-// }
 
 const IdPage = ({ params }: Props) => {
   const [sectionData, setSectionData] = useState<SectionData>();
@@ -67,8 +35,8 @@ const IdPage = ({ params }: Props) => {
   const getSignleSection = async () => {
     setIsLoading(true);
     const message: any = await GET_SINGLE_SECTION_IN_COURSE(params.sectionId, params.id);
-
-    if (message.request.status == 200) {
+  
+    if (message.request.status == 200) {      
       setSectionData(message.data.message);
     } else {
       Swal.fire({

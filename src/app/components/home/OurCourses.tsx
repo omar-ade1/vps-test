@@ -14,6 +14,7 @@ import fff from "../../../../public/fff.jpg";
 import Link from "next/link";
 import { GET_ALL_COURSES } from "@/app/fetchApi/our-course/getCourses";
 import { Course } from "@prisma/client";
+import { GET_COURSES_ONLY } from "@/app/fetchApi/our-course/getCoursesOnly";
 
 const cairo = Cairo({ subsets: ["latin"] });
 
@@ -27,7 +28,7 @@ const OurCourses: React.FC<Props> = ({ setLoadingCoursesData }) => {
   const getCoursesFromDatabase = async () => {
     setLoadingCoursesData(true);
 
-    const message: any = await GET_ALL_COURSES();
+    const message: any = await GET_COURSES_ONLY();
     if (message.request.status == 200) {
       setCoursesData(message.data.message);
     }
@@ -81,8 +82,8 @@ const OurCourses: React.FC<Props> = ({ setLoadingCoursesData }) => {
                         src={`/${process.env.NEXT_PUBLIC_PATH_FOR_IMAGE_COURSES}/${course.courseImg}`}
                         unoptimized
                       />
-                    </CardBody> 
- 
+                    </CardBody>
+
                     <CardFooter>
                       <Button
                         fullWidth
@@ -99,7 +100,7 @@ const OurCourses: React.FC<Props> = ({ setLoadingCoursesData }) => {
                   </Card>
                 </SwiperSlide>
               );
-            })} 
+            })}
           </Swiper>
         </div>
       </div>

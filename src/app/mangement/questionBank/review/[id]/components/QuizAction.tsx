@@ -153,17 +153,13 @@ const QuizAction: React.FC<Props> = ({ questionData, reload, setReload, bankData
     });
   };
 
-  // console.log(bankData.questions.length);
 
   useEffect(() => {
-    console.log(bankData.questions.length);
 
     if (bankData.questions.length < 1 || !bankData.questions) {
       if (parseInt(numberOfCurrentPage) > 1) {
         setNumberOfCurrentPage(String(parseInt(numberOfCurrentPage) - 1));
-        console.log("hi");
       }
-      console.log(true);
     }
   }, [bankData]);
 

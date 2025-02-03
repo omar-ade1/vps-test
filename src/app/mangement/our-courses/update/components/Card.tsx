@@ -199,7 +199,6 @@ const CardFUpdate: React.FC<Props> = ({ reload, setReload, course, setIsLoading 
                   </Button>
                   <Button
                     onClick={() => {
-                      console.log(course.id);
                       handelUpdateCourse(course.id);
                       onClose();
                     }}

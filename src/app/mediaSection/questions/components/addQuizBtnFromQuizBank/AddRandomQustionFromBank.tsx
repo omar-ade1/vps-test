@@ -50,7 +50,6 @@ const AddRandomQustionFromBank: React.FC<Props> = ({ bankData, courseId, testId 
       chosenIndexes.push(randomNumber); // إضافة الرقم إلى المصفوفة
     }
 
-    console.log(chosenQuestions);
 
     try {
       // تنفيذ كل الطلبات في نفس الوقت وانتظار انتهائها

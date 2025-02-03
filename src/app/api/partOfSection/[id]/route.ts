@@ -152,7 +152,6 @@ export async function PUT(request: NextRequest, { params }: Params) {
         });
 
         for (let i = 0; i < videos.count; i++) {
-          console.log(true);
           const singleVideo = await prisma.video.findFirst({
             where: {
               GroupOfSection: {

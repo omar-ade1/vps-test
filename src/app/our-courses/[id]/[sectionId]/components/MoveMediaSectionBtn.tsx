@@ -29,7 +29,6 @@ const MoveMediaSectionBtn: React.FC<Props> = ({ mediaSectionId, reload, setReloa
   const handelGetCoursesData = async () => {
     setIsLoading(true);
     const message: any = await GET_ALL_COURSES();
-    console.log(message);
 
     if (message.request.status === 200) {
       setCoursesData(message.data.message);

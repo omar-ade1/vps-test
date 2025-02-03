@@ -29,7 +29,6 @@ const Menu = () => {
             onClick={(e) => {
               setIsMenuOpen(false);
               e.currentTarget.parentElement?.parentElement?.classList.remove("menu-open");
-              console.log(e.currentTarget.parentElement);
             }}
             className="w-full h-[calc(100vh+65px)] hidden smT0:block fixed inset-0 bg-black opacity-70 z-0"
           ></motion.div>

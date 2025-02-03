@@ -28,7 +28,7 @@ const CoursePage: React.FC<Props> = ({ idCourse, verfiyToken }) => {
     // GET SINGLE COURSE
     const message: any = await GET_SINGLE_COURSE(id);
 
-    if (message.request.status == 200) {
+    if (message.request.status == 200) {      
       setCourseData(message.data.message);
     } else {
       Swal.fire({

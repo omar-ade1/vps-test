@@ -60,9 +60,6 @@ const SettingVideo = () => {
         allowForStudent: message.data.message.Video.allowForStudent,
       }));
     }
-
-    console.log(message);
-
     setTimeout(() => {
       setIsLoading(false);
     }, 100);

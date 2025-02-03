@@ -38,7 +38,6 @@ const ReviewQuestionBank = () => {
 
   // Get Question Bank Data When Page Load
   useEffect(() => {
-    console.log("from page");
     getQuestionBank();
   }, []);
 

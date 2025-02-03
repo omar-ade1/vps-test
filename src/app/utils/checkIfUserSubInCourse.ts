@@ -72,7 +72,6 @@ export const checkUserSubInCourse = (userData: UserData, courseData: CoruseWithS
     // IF USER HAS COURSE HE SUBSCRIBE IN IT
     if (userData.enrollments.length) {
       const filterCheck = userData.enrollments.filter((enrollment) => enrollment.id === courseData.id);
-      console.log(true);
 
       if (filterCheck.length) {
         return true;
@@ -91,7 +90,6 @@ export const checkUserSubInCourse = (userData: UserData, courseData: CoruseWithS
     }
     // IF USER DOESN'T HAS ANY REQUESTS
     else {
-      console.log(true);
 
       return "noRequest";
     }

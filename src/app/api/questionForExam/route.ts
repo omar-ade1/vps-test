@@ -130,7 +130,6 @@ export async function POST(request: NextRequest) {
     // Get Inputs From User
     const body: Body = await request.json();
 
-    console.log(body);
 
     const bodySchema = z.object({
       questionText: z

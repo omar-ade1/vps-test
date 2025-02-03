@@ -88,8 +88,6 @@ export default function RootLayout({ children }: any) {
     handelUserData();
   }, [tokenData]);
 
-  console.log(userData);
-  console.log(courseData);
 
   // run checkUserSubInCourse when the component mounts and userData and courseData state changes
   useEffect(() => {

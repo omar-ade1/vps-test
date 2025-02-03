@@ -73,7 +73,6 @@ const AddQuizBtnFromQuizBank: React.FC<Props> = ({ reload, setReload }) => {
   const getBankQuestions = async () => {
     setIsLoading(true);
     const message: any = await GET_QUESTION_BANK();
-    console.log(message);
     if (message.request.status === 200) {
       setBanksData(message.data.message);
     } else {

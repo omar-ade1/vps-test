@@ -116,7 +116,6 @@ const ViewQuestionBank = ({ params }: { params: { id: string } }) => {
 
   // Run Get Single Bank Function When Id Of Bank Or Number Of Current Page Changes
   useEffect(() => {
-    console.log("from id");
     getSingleBank();
   }, [idOfBank, numberOfCurrentPage, reload]);
 

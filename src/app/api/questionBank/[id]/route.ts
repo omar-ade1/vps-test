@@ -52,7 +52,6 @@ export async function GET(request: NextRequest, { params }: Params) {
       return NextResponse.json({ message: "لا يوجد بنك اسئلة بهذا ال ID" }, { status: 404 });
     }
 
-    console.log(questionBank.questions);
 
     // Return QuestionBank
     return NextResponse.json({ message: questionBank }, { status: 200 });

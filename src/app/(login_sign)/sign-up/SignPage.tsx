@@ -159,8 +159,6 @@ const SignUpPage = () => {
       }
     }
 
-    console.log(true);
-
     // If All Of Schemas Are Successed
     if (
       validationUserName.success &&

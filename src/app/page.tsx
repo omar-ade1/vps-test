@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import LandingSection from "@/app/components/home/LandingSection";
-
 import OurDegrees from "./components/home/OurDegrees";
 import OurCourses from "./components/home/OurCourses";
 import Loader from "./components/Loading/Loader";
@@ -19,8 +17,8 @@ export default function Home() {
       setTimeout(() => {
         setIsLoading(false);
       }, 100);
-}
-  },[loadingDegreeImg, loadingCoursesData])
+    }
+  }, [loadingDegreeImg, loadingCoursesData]);
 
   return (
     <main className="overflow-hidden min-h-[calc(100vh-64px)]">
